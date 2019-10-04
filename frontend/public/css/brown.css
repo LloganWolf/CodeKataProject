@@ -1,0 +1,131 @@
+/* Green */
+
+
+blockquote{
+	border-left: 4px solid #836464;
+}
+
+.color{
+	color: #836464;	
+}
+
+header{
+	border-top: 2px solid #836464;
+}
+
+.navbar button{
+background:#836464 !important;  
+}
+
+.navbar button:hover{
+background:#5c3e3e !important;
+}
+
+.da-slider{
+	border-top: 3px solid #836464;
+	border-bottom: 3px solid #836464;
+}
+
+.da-slide h2 span{
+	background: url("../img/border-g.png") left bottom no-repeat;
+}
+
+.da-slide .da-link{
+	background: #836464;
+}	
+
+.da-slide .da-link:hover{
+	background: #5c3e3e;
+}
+
+.da-dots span{
+	background: #836464;
+}
+
+.da-arrows span{
+	background: #836464;
+}
+
+.full-slider{
+	border-top: 5px solid #5c3e3e;
+	background: #836464;
+}
+
+.full-slider .button a{
+	background: #5c3e3e;
+}
+
+.full-slider .button a:hover{
+	background: #5c3e3e;
+}	
+
+.flex-back{
+	background: #5c3e3e;	
+}
+
+.home-product{
+	background: #836464;
+}
+
+.home-product .home-prod-img{
+	border: 1px solid #5c3e3e;
+}
+
+#portfolio .element{
+	background: #5c3e3e;
+}
+
+#portfolio .pcap{
+	background:#836464;
+	border-top: 2px solid #5c3e3e;
+}
+
+/* Events - Accordion*/
+
+.events .panel-heading h5{
+background:#836464;
+}
+
+.social-links{
+	background: #836464;	
+}
+
+.social-links i{
+	background: #5c3e3e;
+}
+
+.formy{
+	background: #836464;
+}
+
+.service-two i{
+	color: #836464;	
+}
+
+.features-two .feat i, .features-three i{
+	color: #836464;
+}
+
+.about-two .asocial i{
+	background:#836464;
+}
+
+.career .nav-tabs > li > a:hover{
+	background: #836464;
+}
+
+.button a{
+	background: #836464;
+}
+
+.button a:hover{
+	background: #5c3e3e;
+}	
+
+.paging a:hover{
+	background: #836464;
+}
+
+.paging .current{
+	background: #5c3e3e;
+}
