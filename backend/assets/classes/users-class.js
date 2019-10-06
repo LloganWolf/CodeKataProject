@@ -17,7 +17,7 @@ let Users = class {
     return config;
   }
 
-  //Methode de récupération de tous les utilisateurs OK
+  //Methode de récupération de tous les utilisateurs
   static getAll(max) {
     return new Promise((next) => {
       // Render de la route avec les données des paramètres
@@ -51,12 +51,12 @@ let Users = class {
   }
 
   //Methode de récupération d'un utilisateur OK
-  static getOneByID(id, headerAuth) {
+  static getOneByID(id, header_auth) {
     return new Promise((next) => {
-			// On récupère le UserId qui a son token valide
-			let userId = jwtUtils.getUserId(headerAuth);
+			// On récupère le user_id qui a son token valide
+			let user_id = jwtUtils.getUserId(header_auth);
 			// On vérifie que le userId pas valide
-			if(userId < 0 ) {
+			if(user_id < 0 ) {
 				next( new Error(config.errors.badToken) );
 			}
 
@@ -76,17 +76,27 @@ let Users = class {
   }
 
   //Methode d'inscription d'un utilisateur OK
-  static registerUser(login, email, password, name, lastname, creation_date, last_connection, actif, profil_pic, description, role) {
+  static register(login, email, password, firstname, lastname, description, image_user, created_at, connected_at, active, role) {
     // Retourne une Promise
     return new Promise((next) => {
 			// On teste si parametres manquants
-      if(email == null || login == null || password == null) {
+      if(email == null || login == null || password == null || firstname == null || lastname == null) {
 				next( new Error(config.errors.missingParameters) ); // errors.missingParameters
       }
 
 			// On teste la legibilité des données
 			if(login >= 20 || login <= 3) {
 				next( new Error(config.errors.loginData) ); // errors.loginData
+			}
+
+			// On teste la legibilité des données
+			if(firstname >= 20) {
+				next( new Error(config.errors.nameData) ); // errors.nameData
+			}
+
+			// On teste la legibilité des données
+			if(lastname >= 20) {
+				next( new Error(config.errors.nameData) ); // errors.nameData
 			}
 
 			// On teste la legibilité des données
@@ -109,15 +119,9 @@ let Users = class {
 						console.log(result[0])
 						next( new Error(config.errors.emailAlreadyTaken) ); // errors.emailAlreadyTaken
 					} else {
-						/*bcrypt.hash(password, 5).then( (hashedPassword) => {
-							console.log("bcrypt")
-							// On ajoute le nouvel utilisateur de la base de données
-							return db.query('INSERT INTO users(login, email, password, name, lastname, creation_date, last_connection) VALUES(?, ?, ?, ?, ?, ?, ?)', [login, email, hashedPassword, name, lastname, creation_date, last_connection])
-						}) */
-
 						bcrypt.hash(password, 5, (err, hashedPassword) => {
 							// On ajoute le nouvel utilisateur de la base de données
-							return db.query('INSERT INTO users(login, email, mot_de_passe, nom, prenom, date_creation, date_connexion, actif, photo_profil, description, role) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [login, email, hashedPassword, name, lastname, creation_date, last_connection, actif, profil_pic, description, role])
+							return db.query('INSERT INTO users(login, email, password, firstname, lastname, description, image, created_at, connected_at, active, role) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [login, email, hashedPassword, firstname, lastname, description, image_user, created_at, connected_at, active, role])
 						});
 
 					}
@@ -130,18 +134,7 @@ let Users = class {
         .then((result) => {
 					console.log(result)
           next({
-						id: result.id,
-            login: result.login,
-						email: result.email,
-						nom: result.nom,
-						prenom: result.prenom,
-						date_creation: result.date_creation,
-						date_connexion: result.date_connexion,
-						actif: result.actif,
-						name: result.name,
-						photo_profil: result.photo_profil,
-						description: result.description,
-						role: result.role
+						message: "L'utilisateur a bien été enregistré"
           })
         })
         .catch((err) => next(err))
@@ -149,8 +142,8 @@ let Users = class {
     })
   }
 
-	//Methode de login d'un utilisateur KO
-  static loginUser(login, email, password, last_connection) {
+	//Methode de login d'un utilisateur
+  static login(login, email, password, connected_at) {
     // Retourne une Promise
     return new Promise((next) => {
 			// On teste si parametres manquants
@@ -169,7 +162,7 @@ let Users = class {
 						bcrypt.compare(password, result[0].password, (errBycrypt, resBycrypt) => {
 							console.log(resBycrypt)
 							if(resBycrypt) {
-								return db.query('UPDATE users SET date_connexion=? WHERE login=? AND email=?', [last_connection, login, email])
+								return db.query('UPDATE users SET connected_at=? WHERE login=? AND email=?', [connected_at, login, email])
 							}
 						});
 					}
@@ -185,13 +178,12 @@ let Users = class {
 						id: result[0].id,
             login: result[0].login,
 						email: result[0].email,
-						nom: result[0].nom,
-						prenom: result[0].prenom,
-						date_creation: result[0].date_creation,
-						date_connexion: result[0].date_connexion,
-						actif: result[0].actif,
-						name: result[0].name,
-						photo_profil: result[0].photo_profil,
+						firstname: result[0].firstname,
+						lastname: result[0].lastname,
+						created_at: result[0].created_at,
+						connected_at: result[0].connected_at,
+						active: result[0].active,
+						image_user: result[0].image,
 						description: result[0].description,
 						role: result[0].role,
 						token: jwtUtils.generateTokenForUser(result[0])
@@ -203,19 +195,19 @@ let Users = class {
   }
 
   //Methode de modification d'un utilisateur OK
-  static updateUser(id, login, email, name, lastname, last_connection, profil_pic, description, headerAuth) {
+  static update(id, login, email, firstname, lastname, image_user, description, header_auth) {
     // Retourne une Promise
     return new Promise((next) => {
-			// On récupère le UserId qui a son token valide
-			let userId = jwtUtils.getUserId(headerAuth);
+			// On récupère le user_id qui a son token valide
+			let user_id = jwtUtils.getUserId(header_auth);
 
 			// On vérifie que le userId pas valide
-			if(userId < 0 ) {
+			if(user_id < 0 ) {
 				next( new Error(config.errors.badToken) );
 			}
 
-      // On vérifie si l'ID est egale à 'userId'
-      if(id == userId) {
+      // On vérifie si l'ID est egale à 'user_id'
+      if(id == user_id) {
 
         // On récupère l'utilisateur de la base de données dont l'ID
         db.query('SELECT * FROM users WHERE id=?', [id])
@@ -236,7 +228,7 @@ let Users = class {
 
             // On met a jour
             } else {
-              return db.query('UPDATE users SET login = ?, email = ?, nom = ?, prenom = ?, date_connexion = ?, photo_profil = ?, description = ? WHERE id = ?', [login, email, name, lastname, last_connection, profil_pic, description, id])
+              return db.query('UPDATE users SET login = ?, email = ?, firstname = ?, lastname = ?, image = ?, description = ? WHERE id = ?', [login, email, firstname, lastname, image_user, description, id])
             }
           })
           .then(() => {
@@ -252,19 +244,19 @@ let Users = class {
   }
 
   //Methode de suppression d'un utilisateur OK
-  static deleteUser(id, headerAuth) {
+  static deleteUser(id, header_auth) {
     // Retourne une Promise
     return new Promise((next) => {
-			// On récupère le UserId qui a son token valide
-			let userId = jwtUtils.getUserId(headerAuth);
+			// On récupère le user_id qui a son token valide
+			let user_id = jwtUtils.getUserId(header_auth);
 
-			// On vérifie que le userId pas valide
-			if(userId < 0 ) {
+			// On vérifie que le user_id pas valide
+			if(user_id < 0 ) {
 				next( new Error(config.errors.badToken) );
 			}
 
-			// On vérifie si l'ID est egale à 'userId'
-      if(id == userId) {
+			// On vérifie si l'ID est egale à 'user_id'
+      if(id == user_id) {
 	      // On récupère les utilisateurs de la base de données
 				db.query('SELECT * FROM users WHERE id=?', [id])
 	        .then((result) => {

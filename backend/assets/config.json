@@ -1,5 +1,7 @@
 {
-	"api_path": "/api/",
+	"api_path": "/api",
+	"users_path": "/users",
+	"recipes_path": "/recipes",
 	"api_port": 6002,
 	"db": {
 		"host": "localhost",
@@ -16,6 +18,8 @@
 		"emailData": "Email invalid",
 		"emailAlreadyTaken": "Email already taken",
 		"noEmailValue": "No email value",
+		"nameData": "Firstname/Lastname invalid (less than 20)",
+		"titleAlreadyTaken": "Title already taken",
 		"titleData": "Title length problem (between 4 and 20)",
 		"noTitleValue": "No title value",
 		"filenameData": "Filename length problem (greater than 3)",

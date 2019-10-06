@@ -1,9 +1,10 @@
 const jwt = require ('jsonwebtoken');
-const JWT_SIGN_SECRET = 'aBgWPpYpIJd5EVD_3AIieDVyrgO3upp606NlnUyDZf7wgreFzbzfY3JuA_uv60p2IRvQK6s4uuCRzd966yA';
+const JWT_SIGN_SECRET = 'hdeR9fx8UuO-Tm7tYthvCvqmrB3lXSj7HeijoeedOmpKFmBWQTj2yM4nui-bZ';
 // Pour générer une clé secrete : https://mkjwk.org/
 
 // Fonctions Exportées
 module.exports = {
+  // Fonction de génération d'un token
   generateTokenForUser: ((userData) => {
     return jwt.sign({
       userId: userData.id
@@ -13,9 +14,13 @@ module.exports = {
       expiresIn: '1h'
     })
   }),
+
+  // Fonction de parsing de l'entete d'autorisation
   parseAuthorization: ((authorization) => {
     return (authorization != null) ? authorization.replace('Bearer ', '') : null;
   }),
+
+  // Fonction de récupération d'un utilisateur
   getUserId:((authorization) => {
     let userId = -1;
     let token = module.exports.parseAuthorization(authorization);
