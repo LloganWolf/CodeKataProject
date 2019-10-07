@@ -4,14 +4,12 @@ Ce projet est un site internet communautaire permettant de gérer ses recettes d
    - créer des recettes de cuisine
    - créer ses recettes de cuisine
    - supprimer ses recettes de cuisine
-   - partager ses recettes de cuisine à la communauté
-   - possibilité de discuter en direct avec la communauté (forum ou chat ?)
 
 *2/ Informations sur le projet*
 Le projet est composé de 2 parties :
    - Une API, faite en NodeJS, permet de gérer les informations et les routes du projet
    - Le frontend, fait en ReactJS, permet l'affichage des informations
-   - Une base de données (MySql ou Firebase ?), pour le stockage des données
+   - Une base de données MySql pour le stockage des données
 
 *3/ Installation du projet*
 - Ouvrir une ligne de commande
