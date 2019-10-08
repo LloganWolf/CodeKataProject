@@ -170,6 +170,10 @@ mysql.createConnection({
 				.get(async(req, res) => {
 					let id = req.params.id
 					let max = req.query.max
+
+					// On récupère l'entete autorisation
+					//let header_auth = req.headers['authorization'];
+
 					// On appelle la methode getAllByUserid() de la classe Recipes(){}
 					let allUserRecipes = await Recipes.getAllByUserid(id, max)
 					// Gestion des erreurs fait dans le fichier function.js
@@ -201,7 +205,7 @@ mysql.createConnection({
 
 					// On récupère l'entete autorisation
 					let header_auth = req.headers['authorization'];
-
+					console.log(header_auth)
 					// On appelle la methode add() de la classe Recipes(){}
 					let add_recipe = await Recipes.add(title, ingredient, description, category, image_recipe, created_at, header_auth)
 					// Gestion des erreurs fait dans le fichier function.js

@@ -120,7 +120,7 @@ let Recipes = class {
 						next( new Error(config.errors.recipeAlreadyExist) );
 					} else {
 						// On ajoute le nouvel utilisateur de la base de données
-						return db.query('INSERT INTO recipes(title, ingredient, description, category, image_recipe, created_at, user_id) VALUES(?, ?, ?, ?, ?, ?, ?)', [title, ingredient, description, category, image_recipe, created_at, user_id])
+						return db.query('INSERT INTO recipes(title, ingredient, description, category, image, created_at, user_id) VALUES(?, ?, ?, ?, ?, ?, ?)', [title, ingredient, description, category, image_recipe, created_at, user_id])
 					}
         })
         .then(() => {
