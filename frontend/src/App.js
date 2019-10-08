@@ -8,6 +8,7 @@ import Navbar from "./Components/Navbar";
 import Title from "./Components/Title";
 import Recipes from "./Components/Recipes";
 import './App.css';
+import MakePost from './Components/MakePost';
 
 class App extends Component {
   constructor(props) {
@@ -23,19 +24,10 @@ class App extends Component {
       token:      this.props.userDatas[0] ? this.props.userDatas[0].token : "",
       role:       this.props.userDatas[0] ? this.props.userDatas[0].role : "",
       description:this.props.userDatas[0] ? this.props.userDatas[0].description : "",
-      recipes:    [],
 		};
   }
 
   componentDidMount() {
-    axios.get(`http://localhost:6002/api/recipes/user/${this.state.id}`)
-      .then(res => {
-        console.log(res.data)
-        this.setState({
-          recipes: res.data,
-        })
-      })
-
     console.log("id : " + this.state.id)
     console.log("login : " + this.state.login)
     console.log("email : " + this.state.email)
@@ -49,31 +41,34 @@ class App extends Component {
 
   render() {
     let {logged_in} = this.state
-    
+
     if(logged_in === true) {
       return (
         <Fragment>
           <Header />
-          
+
           <Navbar logged_in={logged_in} />
-          
+
           <div class="content">
             <div class="container">
               <Title titre="Mes recettes" accroche="Retrouver toute vos recettes" />
-              
+
               <div class="row">
-                {/* Recipes */}
-                <Recipes />
-                <Recipes />
-                <Recipes />
-                <Recipes />
+                <Recipes id={this.state.id} />
               </div>
-            
+              <div className="col-md-12">
+                <div className="content-article">
+                  <div class="row">
+                    <MakePost/>
+                  </div>
+                </div>
+              </div>
+
             </div>
           </div>
 
         </Fragment>
-        
+
       );
     } else {
       return (<Redirect push to={`/`} />);

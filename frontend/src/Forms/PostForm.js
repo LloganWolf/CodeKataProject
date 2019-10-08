@@ -28,7 +28,7 @@ class PostForm extends Component {
 
     // Methode de gestion de remise à zero des champs du formulaire
     handleReset = () => {
-        this.setState({ 
+        this.setState({
             title: "",
             category: "",
             ingredient: "",
@@ -40,7 +40,12 @@ class PostForm extends Component {
     handleSubmit = (e, data) => {
         e.preventDefault();
         axios
-            .post(`http://localhost:6002/api/recipes`, data)
+            .post(`http://localhost:6002/api/recipes`, data, {
+              headers: {
+                'Content-Type': 'application/json',
+                'authorization': this.props.userDatas[0].token
+              }
+            })
             .then(res => {
                 if(res.status === 200) {
                     console.log(res.data)
@@ -51,46 +56,54 @@ class PostForm extends Component {
                 this.setState({
                     error_message: err.message,
                 })
-        })	
+        })
     }
 
     render() {
-        let {title, category, ingredient, description, success_post, error_message} = this.state
-
+      let {title, category, ingredient, description, success_post} = this.state
         return (
             <form class="form-horizontal" onSubmit={e => this.handleSubmit(e, this.state)} onReset={this.handleReset}>
-                <div class="form-group">
-                    <label class="control-label col-md-3" htmlFor="new-recipe_title">Titre</label>
-                    <div class="col-md-9">
-                        <input id="new-recipe_title" name="title" type="text" class="form-control" />
-                    </div>
-                </div>   
 
-                <div class="form-group">
-                    <label class="control-label col-md-3" htmlFor="new-recipe_category">Catégorie</label>
-                    <div class="col-md-9">                               
-                        <select id="new-recipe_category" name="category" class="form-control">
-                            <option>&nbsp;</option>
-                            <option>Entrée</option>
-                            <option>Plats</option>
-                            <option>Desserts</option>
-                            <option>Hors-d'oeuvre</option>
-                            <option>Encas</option>
-                        </select>  
-                    </div>
-                </div>     
-
-                <div class="form-group">
-                    <label class="control-label col-md-3" htmlFor="new-recipe_ingredient">Ingrédients</label>
-                    <div class="col-md-9">
-                        <input id="new-recipe_ingredient" name="ingredient" class="form-control" type="text" placeholder="Separés par des ;" />
+                <div className="row">
+                    <div className="col-sm-12">
+                        <div className="form-group">
+                            <label htmlFor="new-recipe_title">Titre <sup className="cb-asterisque"><i className="fa fa-asterisk"></i></sup></label>
+                            <input id="new-recipe_title" name="title" type="text" className="form-control" required="required" value={title} onChange={this.handleChange} placeholder="Nom de la recette" />
+                        </div>
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label class="control-label col-md-3" htmlFor="new-recipe_description">Description</label>
-                    <div class="col-md-9">
-                        <input id="new-recipe_description" name="description" class="form-control" type="text" placeholder="Etapes de réalisation de la recette" />
+                <div class="row">
+                    <div className="col-sm-12">
+                        <div className="form-group">
+                            <label htmlFor="new-recipe_category">Catégorie <sup className="cb-asterisque"><i className="fa fa-asterisk"></i></sup></label>
+                            <select id="new-recipe_category" name="category" class="form-control" value={category} onChange={this.handleChange}>
+                                <option value="">&nbsp;</option>
+                                <option value="entree">Entrée</option>
+                                <option value="plat">Plat</option>
+                                <option value="dessert">Dessert</option>
+                                <option value="hors">Hors-d'oeuvre</option>
+                                <option value="encas">Encas</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="row">
+                    <div className="col-sm-12">
+                        <div className="form-group">
+                            <label htmlFor="new-recipe_ingredient">Ingrédients <sup className="cb-asterisque"><i className="fa fa-asterisk"></i></sup></label>
+                            <input id="new-recipe_ingredient" name="ingredient" type="text" className="form-control" required="required" value={ingredient} onChange={this.handleChange} placeholder="Liste des ingrédients" />
+                        </div>
+                    </div>
+                </div>
+
+                <div className="row">
+                    <div className="col-sm-12">
+                        <div className="form-group">
+                            <label htmlFor="new-recipe_description">Etapes <sup className="cb-asterisque"><i className="fa fa-asterisk"></i></sup></label>
+                            <textarea id="new-recipe_description" name="description" type="text" className="form-control" required="required" value={description} onChange={this.handleChange} placeholder="Etape de la recette"></textarea>
+                        </div>
                     </div>
                 </div>
 
@@ -100,17 +113,17 @@ class PostForm extends Component {
                 </div>
                 }
 
-    
+
                 <div class="form-group">
-                    <div class="col-md-3 col-md-offset-3"> 
+                    <div class="col-md-3 col-md-offset-3">
                         <button id="publication" name="publication" type="submit" className="btn cb-bouton_connexion">Publier</button>
                     </div>
-                    <div class="col-md-3"> 
+                    <div class="col-md-3">
                         <input type="reset" className="btn cb-bouton_initialisation" />
                     </div>
                 </div>
-                
-            </form>  
+
+            </form>
         )
     }
 
@@ -120,5 +133,5 @@ class PostForm extends Component {
 const mapStateToProps = (state) => {
     return {userDatas: state.userDatas}
 }
-  
+
 export default connect(mapStateToProps)(PostForm);

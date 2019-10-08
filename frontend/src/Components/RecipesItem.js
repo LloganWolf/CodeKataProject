@@ -4,9 +4,9 @@ const RecipesItem = (props) => {
     return(
         <div class="entry">
             <h2><a href={`${props.lien_url}`}>{props.titre}</a></h2>
-            
+
             <div class="meta clearfix">
-                <i class="fa fa-calendar"></i> {props.datecreation} <i class="fa fa-user"></i> {props.auteur} <i class="fa fa-folder-open"></i> <a href={`/recipes#keywords=${props.categorie}`}>{props.categorie}</a> <span class="pull-right"><i class="fa fa-comment"></i> 2 Comments</span>
+                <i class="fa fa-calendar"></i> {props.datecreation} <i class="fa fa-user"></i> {props.auteur} <i class="fa fa-folder-open"></i> <a href={`/recipes#keywords=${props.categorie}`}>{props.categorie}</a> <span class="pull-right"></span>
             </div>
 
             <div class="bthumb">

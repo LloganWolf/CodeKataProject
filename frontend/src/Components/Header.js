@@ -9,7 +9,7 @@ class Header extends Component {
 		};
   }
 
-  /* handle_logout = () => {
+  handle_logout = () => {
     const action = { 
       type: "REMOVE_USER_CREDENTIALS",
       value: this.props.userDatas
@@ -21,7 +21,7 @@ class Header extends Component {
 			logged_in: false,
     });
     
-  }; */
+  };
   
   render() {
     return(
