@@ -29,7 +29,7 @@ class Subscription extends Component {
                                         <div className="modal-dialog">
                                             <div className="modal-content">
                                                 <div className="modal-body">
-                                                    <div className="formy">
+                                                    <div className="formy" style={{background: "#6f1718"}}>
                                                         <RegisterForm />
                                                     </div>
                                                 </div>
