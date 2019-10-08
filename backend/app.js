@@ -83,9 +83,9 @@ mysql.createConnection({
 			.get(async(req, res) => {
 				let id = req.params.id
 				// On récupère l'entete autorisation
-				let headerAuth = req.headers['authorization'];
+				let header_auth = req.headers['authorization'];
 				// On appelle la methode getOneByID() de la classe Users(){}
-				let user = await Users.getOneByID(id, headerAuth)
+				let user = await Users.getOneByID(id, header_auth)
 				// Gestion des erreurs fait dans le fichier function.js
 				res.json(utils.checkAndChange(user))
 			})
@@ -130,7 +130,9 @@ mysql.createConnection({
 					let email = req.body.email
 					let password = req.body.password
 					let connected_at = utils.newDate()
-
+					console.log(login)
+					console.log(email)
+					console.log(password)
 					// On appelle la methode loginUser() de la classe Users(){}
 					let login_user = await Users.login(login, email, password, connected_at)
 					// Gestion des erreurs fait dans le fichier function.js
@@ -160,17 +162,50 @@ mysql.createConnection({
 				 	res.json(utils.checkAndChange(register_user))
 				})
 
-			/****** TÂCHES ******/
+			/****** UTILISATEUR-RECETTE ******/
+			// http://localhost:6002/api/recipes/user/<id>
+			RecipesRouter.route('/user/:id')
+				//GET
+				// Récupérer toutes les tâches
+				.get(async(req, res) => {
+					let id = req.params.id
+					let max = req.query.max
+					// On appelle la methode getAllByUserid() de la classe Recipes(){}
+					let allUserRecipes = await Recipes.getAllByUserid(id, max)
+					// Gestion des erreurs fait dans le fichier function.js
+					res.json(utils.checkAndChange(allUserRecipes))
+				})
+
+			/****** RECETTES ******/
 			// http://localhost:6002/api/recipes
 			RecipesRouter.route('/')
 				//GET
-				// Récupérer toutes les tâches
+				// Récupérer toutes les recettes
 				.get(async(req, res) => {
 					let max = req.query.max
 					// On appelle la methode getAll() de la classe Recipes(){}
 					let allRecipes = await Recipes.getAll(max)
 					// Gestion des erreurs fait dans le fichier function.js
 					res.json(utils.checkAndChange(allRecipes))
+				})
+
+				//POST
+				// Créer une nouvelle recette
+				.post(async(req, res) => {
+					let title = req.body.title
+					let ingredient = req.body.ingredient
+					let description = req.body.description
+					let category = req.body.category
+					let image_recipe = "http://placehold.it/750x450"
+					let created_at = utils.newDate()
+
+					// On récupère l'entete autorisation
+					let header_auth = req.headers['authorization'];
+
+					// On appelle la methode add() de la classe Recipes(){}
+					let add_recipe = await Recipes.add(title, ingredient, description, category, image_recipe, created_at, header_auth)
+					// Gestion des erreurs fait dans le fichier function.js
+					res.json(utils.checkAndChange(add_recipe))
 				})
 
 			// On définit l'URL de la route
