@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './index.css';
 import App from './App';
+import Recipe from './Components/Recipe';
+import MakePost from './Components/MakePost';
+import Users from './Users';
 import Subscription from './Components/Subscription';
 import NotFound from './Components/NotFound';
 import * as serviceWorker from './serviceWorker';
@@ -12,6 +15,11 @@ const Root = () => (
         <Switch>
             <Route exact path='/' component={Subscription} />
             <Route path='/accueil/' component={App} />
+            <Route path='/shares/' component={App} />
+            <Route path='/create/' component={MakePost} />
+            <Route path='/users/' component={Users} />
+            <Route path='/friends/' component={Users} />
+            <Route path='/recipe/' component={Recipe} />
             <Route component={NotFound} />
         </Switch>
     </BrowserRouter>

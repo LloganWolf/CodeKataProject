@@ -223,7 +223,7 @@ body.cb-page_connexion {
 }
 
 .cb-cadre_form {
-    background-color: #f29292;
+    background-color: #e4e4e4;
 	padding-right: 2%;
     padding-top: 2%;
     padding-bottom: 3%;
@@ -240,6 +240,57 @@ body.cb-page_connexion {
 
 .cb-effet {
     color: #5c5c5c;
+}
+.posts {
+	border-radius: 0px !important;
+}
+
+.entry {
+	margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+    font-size: 13px;
+    line-height: 25px;
+}
+
+.meta {
+	border-top: 1px solid #f7f7f7;
+    border-bottom: 1px solid #f7f7f7;
+    margin: 8px 0px;
+    padding: 5px 8px;
+    color: #777;
+    text-transform: uppercase;
+    font-size: 11px;
+}
+
+.bthumb {
+	margin: 10px 0px 5px 0px;
+    padding: 1px;
+    box-shadow: 0px 0px 1px #777;
+}
+
+.comments {
+    margin-bottom: 20px;
+}
+
+.comments .comment {
+    margin: 15px 0px;
+    padding: 13px 16px;
+    background: #f8f8f8;
+    border-left: 2px solid #ddd;
+}
+
+.comment .avatar {
+    margin-top: 5px;
+    margin-right: 8px;
+}
+
+.comment .cmeta {
+    font-size: 12px;
+}
+
+.comments .reply {
+    margin-left: 15px;
 }
 
 /* FOOTER */

@@ -2389,51 +2389,6 @@ label.label-generation {
 	border: solid 1px #fff;
 }
 
-/* CSS du UserBundle */
-.ac-adobecompo {
-	text-align: center;
-    padding: 7% 0%;
-}
-
-.ac-useradobe {
-	font-size: 4.5em;
-    font-weight: normal;
-	line-height: 1.4em;
-	color: #c10506;
-}
-	
-.ac-usercompo {
-    font-size: 3em !important;
-    font-family: 'Open Sans', sans-serif;
-    margin-bottom: 10px;
-    font-weight: 300;
-	margin-left: 40%;
-}
-
-.ac-userform {
-	margin: 10% 0% 2% 0%;
-}
-
-/* FOOTER */
-.ac-footerForm {
-    margin-top: 0%;
-}
-
-.ac-footerButton {
-    margin-bottom: 1%; width: 50%;
-}
-
-.ac-lienFooter {
-    color: #EEA236;
-    font-size: 1.1em;
-    margin-left: 3%;
-}
-
-/* MODAL */
-.texteModal {
-    text-align: center;
-    font-size: 1.1em;
-}
 
 /* Responsive */
 

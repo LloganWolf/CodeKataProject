@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import Connectionform from './Connectionform';
-import Registerform from './Registerform';
+import ConnectionForm from '../Forms/ConnectionForm';
+import RegisterForm from '../Forms/RegisterForm';
 
 class Subscription extends Component {
 
@@ -21,7 +21,7 @@ class Subscription extends Component {
                                 <div className="col-md-12 col-xs-12">
 
                                     {/* Formulaire de connexion */}
-                                    <Connectionform />
+                                    <ConnectionForm />
 
                                     {/* ENSEMBLE DES BOITES MODALES */}
                                     {/* Contenus de la boite modale "modal_inscription" */}
@@ -30,7 +30,7 @@ class Subscription extends Component {
                                             <div className="modal-content">
                                                 <div className="modal-body">
                                                     <div className="formy">
-                                                        <Registerform />
+                                                        <RegisterForm />
                                                     </div>
                                                 </div>
                                             </div>
