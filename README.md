@@ -35,6 +35,9 @@ cd path/de/mon/repertoire
    ```
    git clone https://github.com/LloganWolf/CodeKataProject.git
    ```
+   - Récuperer le fichier "katacode.sql" dans le répertoire "backend/bdd"
+   - Importer la base MySql et la rendre disponible 
+   - Changer les crédentials de la base de données dans le fichier "config.json" qui se trouve dans le répertoire "backend/assets"
    - Se mettre sur le répertoire "backend" :
    ```
    cd backend
