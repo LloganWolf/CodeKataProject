@@ -1,0 +1,231 @@
+{
+  "info": {
+    "title": "Gestionnaire de recette",
+    "version": "1.0.0",
+    "description": "Api du gestionnaire de recette"
+  },
+  "tags":[
+	{
+		"name": "Api",
+		"description": "Méthodes globales"
+	},
+	{
+		"name": "Utilisateurs",
+		"description": "Méthodes permettant la gestion des Utilisateurs"
+	},
+	{
+		"name": "Recettes",
+		"description": "Méthodes permettant la gestion des Recettes"
+	}
+  ],
+  "paths": {
+    "/upload": {
+      "post": {
+		"tags": ["Api"],
+        "summary": "/upload",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/api": {
+      "get": {
+		"tags": ["Api"],
+        "summary": "/api",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/api/recipes/user/{id}": {
+      "get": {
+		"tags": ["Recettes"],
+        "summary": "/api/recipes/user/{id}",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "result": {
+                  "type": "array",
+                  "items": {},
+                  "example": []
+                }
+              }
+            }
+          },
+          "304": {}
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/api/recipes": {
+      "get": {
+		"tags": ["Recettes"],
+        "summary": "/api/recipes",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {}
+      },
+      "post": {
+		"tags": ["Recettes"],
+        "summary": "/api/recipes",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/api/recipes/{id}": {
+      "get": {
+		"tags": ["Recettes"],
+        "summary": "/api/recipes/{id}",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {}
+      },
+      "put": {
+		"tags": ["Recettes"],
+        "summary": "/api/recipes/{id}",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {}
+      },
+      "delete": {
+		"tags": ["Recettes"],
+        "summary": "/api/recipes/{id}",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/api/users": {
+      "get": {
+		"tags": ["Utilisateurs"],
+        "summary": "/api/users",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/api/users/{id}": {
+      "get": {
+		"tags": ["Utilisateurs"],
+        "summary": "/api/users/{id}",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {}
+      },
+      "put": {
+		"tags": ["Utilisateurs"],
+        "summary": "/api/users/{id}",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {}
+      },
+      "delete": {
+		"tags": ["Utilisateurs"],
+        "summary": "/api/users/{id}",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/api/users/signin": {
+      "post": {
+		"tags": ["Utilisateurs"],
+        "summary": "/api/users/signin",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/api/users/signup": {
+      "post": {
+		"tags": ["Utilisateurs"],
+        "summary": "/api/users/signup",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {}
+      }
+    }
+  },
+  "swagger": "2.0"
+}
