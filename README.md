@@ -6,7 +6,6 @@ Ce projet est un site internet communautaire permettant de gérer ses recettes d
    - supprimer ses recettes de cuisine
 
 *2/ Informations sur le projet*
-Le projet est composé de 2 parties :
    - Une API, faite en NodeJS, permet de gérer les informations et les routes du projet
    - Le frontend, fait en ReactJS, permet l'affichage des informations
    - Une base de données MySql pour le stockage des données
