@@ -156,39 +156,35 @@ let Users = class {
         .then((result) => {
           // Si pas de résultat
 					if(result[0] == undefined) {
-						// CONTROLE
 						next( new Error(config.errors.credentialError) ); // errors.credentialError
 					} else {
 						bcrypt.compare(password, result[0].password, (errBycrypt, resBycrypt) => {
-							console.log(resBycrypt)
 							if(resBycrypt) {
-								return db.query('UPDATE users SET connected_at=? WHERE login=? AND email=?', [connected_at, login, email])
+								next({
+									id: result[0].id,
+									login: result[0].login,
+									email: result[0].email,
+									firstname: result[0].firstname,
+									lastname: result[0].lastname,
+									created_at: result[0].created_at,
+									connected_at: result[0].connected_at,
+									active: result[0].active,
+									image_user: result[0].image,
+									description: result[0].description,
+									role: result[0].role,
+									token: jwtUtils.generateTokenForUser(result[0])
+								})
+							} else {
+								next( new Error(config.errors.credentialError) ); // errors.credentialError
 							}
 						});
 					}
         })
         .then(() => {
           // On renvoie la response formateur de l'ajout
-          return db.query('SELECT * FROM users WHERE email=? AND login=?', [email, login])
+          return db.query('UPDATE users SET connected_at=? WHERE login=? AND email=?', [connected_at, login, email])
         })
-        // On affiche le resultat
-        .then((result) => {
-					//console.log("OK")
-          next({
-						id: result[0].id,
-            login: result[0].login,
-						email: result[0].email,
-						firstname: result[0].firstname,
-						lastname: result[0].lastname,
-						created_at: result[0].created_at,
-						connected_at: result[0].connected_at,
-						active: result[0].active,
-						image_user: result[0].image,
-						description: result[0].description,
-						role: result[0].role,
-						token: jwtUtils.generateTokenForUser(result[0])
-          })
-        })
+        
         .catch((err) => next(err))
 
     })

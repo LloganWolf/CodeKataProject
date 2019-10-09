@@ -61,6 +61,7 @@ mysql.createConnection({
 	let UsersRouter = express.Router();
 
 	// Appel des classes
+	let Users = require('./assets/classes/users-class')(db, config)
 	let Recipes = require('./assets/classes/recipes-class')(db, config)
 
 	// http://localhost:6002/upload/
@@ -100,6 +101,7 @@ mysql.createConnection({
 			console.log(password)
 			// On appelle la methode loginUser() de la classe Users(){}
 			let login_user = await Users.login(login, email, password, connected_at)
+			console.log(login_user)
 			// Gestion des erreurs fait dans le fichier function.js
 			res.json(utils.checkAndChange(login_user))
 		})
@@ -115,7 +117,7 @@ mysql.createConnection({
 			let firstname = req.body.firstname
 			let lastname = req.body.lastname
 			let description = req.body.description
-			let image_user = "default_profil.jpg"
+			let image_user = req.body.image_name
 			let created_at = utils.newDate()
 			let connected_at = utils.newDate()
 			let active = 1
