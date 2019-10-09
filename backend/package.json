@@ -1,5 +1,5 @@
 {
-  "name": "Recipe Manager",
+  "name": "RecipeManager",
   "version": "1.0.0",
   "description": "Api de gestion de recettes de cuisine",
   "main": "app.js",
