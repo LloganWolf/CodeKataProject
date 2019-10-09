@@ -25,7 +25,7 @@ class Recipes extends Component {
   }
 
   componentDidMount() {
-    if(this.props.userDatas[0] !== undefined) {
+    if(this.props.userDatas[0] !== null) {
       axios.get(`http://localhost:6002/api/recipes/user/${this.props.userDatas[0].id}`)
         .then(res => {
           this.setState({
@@ -37,7 +37,7 @@ class Recipes extends Component {
 
   render() {
     let { recipes } = this.state
-    if(this.props.userDatas[0] === undefined) {
+    if(this.props.userDatas[0] === null || this.props.userDatas[0] === undefined) {
       return <Redirect push to={`/`} />
     }
     

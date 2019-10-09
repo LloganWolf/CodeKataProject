@@ -136,18 +136,18 @@ class PostForm extends Component {
         }
 
         return (
-            <form class="form-horizontal" onSubmit={e => this.handleSubmit(e, this.state)} onReset={this.handleReset} onClick={this.handleClick}>
-                <div class="form-group">
-                    <label class="control-label col-md-3" htmlFor="new-recipe_title">Titre</label>
-                    <div class="col-md-9">
-                        <input id="new-recipe_title" name="title" type="text" class="form-control" required="required" value={title} onChange={this.handleChange} />
+            <form className="form-horizontal" onSubmit={e => this.handleSubmit(e, this.state)} onReset={this.handleReset} onClick={this.handleClick}>
+                <div className="form-group">
+                    <label className="control-label col-md-3" htmlFor="new-recipe_title">Titre</label>
+                    <div className="col-md-9">
+                        <input id="new-recipe_title" name="title" type="text" className="form-control" required="required" value={title} onChange={this.handleChange} />
                     </div>
                 </div>   
 
-                <div class="form-group">
-                    <label class="control-label col-md-3" htmlFor="new-recipe_category">Catégorie</label>
-                    <div class="col-md-9">                               
-                        <select id="new-recipe_category" name="category" class="form-control" value={category} onChange={this.handleChange}>
+                <div className="form-group">
+                    <label className="control-label col-md-3" htmlFor="new-recipe_category">Catégorie</label>
+                    <div className="col-md-9">                               
+                        <select id="new-recipe_category" name="category" className="form-control" value={category} onChange={this.handleChange}>
                             <option value="">&nbsp;</option>
                             <option value="entree">Entrée</option>
                             <option value="plat">Plat</option>
@@ -158,39 +158,39 @@ class PostForm extends Component {
                     </div>
                 </div>     
 
-                <div class="form-group">
-                    <label class="control-label col-md-3" htmlFor="new-recipe_image">Photo</label>
-                    <div class="col-md-9">
+                <div className="form-group">
+                    <label className="control-label col-md-3" htmlFor="new-recipe_image">Photo</label>
+                    <div className="col-md-9">
                         <input id="new-recipe_image" name="image" type="file" onChange={this.handleChangeFile} ref={this.fileInput} />
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label class="control-label col-md-3" htmlFor="new-recipe_ingredient">Ingrédients</label>
-                    <div class="col-md-9">
-                        <input id="new-recipe_ingredient" name="ingredient" type="text" class="form-control" required="required" value={ingredient} onChange={this.handleChange} placeholder="Separés par des ;" />
+                <div className="form-group">
+                    <label className="control-label col-md-3" htmlFor="new-recipe_ingredient">Ingrédients</label>
+                    <div className="col-md-9">
+                        <input id="new-recipe_ingredient" name="ingredient" type="text" className="form-control" required="required" value={ingredient} onChange={this.handleChange} placeholder="Separés par des ;" />
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label class="control-label col-md-3" htmlFor="new-recipe_description">Description</label>
-                    <div class="col-md-9">
+                <div className="form-group">
+                    <label className="control-label col-md-3" htmlFor="new-recipe_description">Description</label>
+                    <div className="col-md-9">
                         <textarea id="new-recipe_description" name="description" row="5" className="form-control" required="required" value={description} onChange={this.handleChange} placeholder="Etape de la recette"></textarea>
                     </div>
                 </div>
 
                 {error_message !== "" &&
-                <div class="alert alert-danger" role="alert">
+                <div className="alert alert-danger" role="alert">
                     Erreur lors de la création d'un recette
                 </div>
                 }
 
     
-                <div class="form-group">
-                    <div class="col-md-3 col-md-offset-3"> 
+                <div className="form-group">
+                    <div className="col-md-3 col-md-offset-3"> 
                         <button id="publication" name="publication" type="submit" className="btn cb-bouton_connexion">Publier</button>
                     </div>
-                    <div class="col-md-3"> 
+                    <div className="col-md-3"> 
                         <input type="reset" className="btn cb-bouton_initialisation" />
                     </div>
                 </div>

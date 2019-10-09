@@ -40,16 +40,23 @@ class ConnectionForm extends Component {
         axios
             .post(`http://localhost:6002/api/users/signin`, data)
             .then(res => {
+				
                 if(res.status === 200) {
-                    const action = { 
-                        type: "ADD_USER_CREDENTIALS",
-                        value: res.data.result
-                    }
-                    this.props.dispatch(action)
+					if(res.data.status !== "error") {
+						const action = { 
+							type: "ADD_USER_CREDENTIALS",
+							value: res.data.result
+						}
+						this.props.dispatch(action)
 
-                    this.setState({
-                        logged_in: true,
-                    })
+						this.setState({
+							logged_in: true,
+						})
+					} else {
+						this.setState({
+							error_message: res.data.message,
+						})
+					}
                 }
             })
             .catch(err => {
@@ -104,7 +111,7 @@ class ConnectionForm extends Component {
                 {error_message !== "" &&
                 <div className="form-group">
                     <div className="col-md-12">
-                        <label id="err_message" name="err_message" htmlFor="err_message" style={{color: '#71394d', display: '#block'}}></label>
+                        <label id="err_message" name="err_message" htmlFor="err_message" style={{color: '#71394d', display: '#block'}}>{error_message}</label>
                     </div>
                 </div>
                 }

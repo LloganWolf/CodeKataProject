@@ -11,18 +11,62 @@ class RegisterForm extends Component {
             password: "",
             firstname: "",
             lastname: "",
-            //image_user: "",
+            image_name: "",
+            file: null,
             description: "",
             logged_in: false,
             error_message: "",
             success_message: "",
         }
     }
+	
+	// Methode de vérification des Mimetypes
+    checkMimeType = (event) => {
+        let files = event.target.files
+        let err = ''
+        const types = ['image/jpeg', 'image/png', '']
+        
+        // Boucle sur l'array des autorisations
+        for(let x = 0; x < files.length; x++) {
+            if (types.every(type => files[x].type !== type)) {
+                err += files[x].type+' n\'est pas accepté comme format de fichier\n';
+            }
+        };
+        
+        // Si il y a un message d'erreur
+        if(err !== '') {
+            event.target.value = null // On vide la sélection
+            console.log(err)
+            return false;
+        }
 
+    return true;
+
+    }
+	
+	// Methode de gestion des uploads
+    handleChangeFile = event => {
+        console.log(event.target.files)
+        let files = event.target.files
+        console.log(files.length)
+        if(this.checkMimeType(event)){
+            this.setState({
+                file: files,
+                image_name: files[0].name
+            })
+        }
+    }
+	
     // Méthode de gestion des champs de formulaire
     handleChange = event => {
-        const target = event.target;
-        const value = target.type === 'checkbox' ? target.checked : target.value;
+        let target = event.target; // On instancie le target
+		let value = target.value;
+        
+        if(target.type === 'checkbox') {
+            value = target.checked
+        } else if(target.type === 'file') {
+            value = target.files[0]
+        }
         const name = target.name;
         this.setState({
           [name]: value
@@ -40,7 +84,27 @@ class RegisterForm extends Component {
             description: '',
         })
     }
-
+	
+	//Evenement métier handleSubmit
+	handleClick = () => {
+        const data = new FormData()
+    
+        // Test de présence d'un fichier
+        if(this.state.file === null) {
+            data.append('file', '')
+        } else {
+            for(let i = 0; i < this.state.file.length; i++) {
+                data.append('file', this.state.file[i])
+            }
+        }
+    
+        // On met a jour la BDD
+        axios.post("http://localhost:6002/upload", data, {})
+             .then(res => {
+               console.log(res.statusText)
+        })
+    }
+	
     // Méthode de gestion de la connexion
     handleSignup = (e, data) => {
         e.preventDefault();
@@ -63,7 +127,7 @@ class RegisterForm extends Component {
         let {login, email, password, firstname, lastname, description, success_message, error_message} = this.state;
 
         return (
-            <form name="registerForm" onSubmit={e => this.handleSignup(e, this.state)} onReset={this.handleReset}>
+            <form name="registerForm" onSubmit={e => this.handleSignup(e, this.state)} onReset={this.handleReset} onClick={this.handleClick}>
                 <div className="form">
                     <div className="row">
                         <div className="col-sm-12">
@@ -128,16 +192,16 @@ class RegisterForm extends Component {
                     <br/>
 
                     {/* Image avatar */}
-                    {/*<div className="row">
+                    <div className="row">
                         <div className="form-group">
                             <label className="control-label col-md-3" style={{textAlign: 'center'}} htmlFor="register_image_user">Photo profil</label>
                             <div className="col-md-9">
-                                <input id="register_image_user" name="image_user" type="file" />
+                                <input id="register_image_user" name="image" type="file" onChange={this.handleChangeFile} ref={this.fileInput} />
                             </div>
                         </div>
                     </div>
-                    <br /> */}
-
+                    <br />
+				
                     {/* Champ Description */}
                     <div className="row">
                         <div className="form-group">
@@ -149,13 +213,13 @@ class RegisterForm extends Component {
                     </div>
                     <br />
                     {success_message !== "" &&
-                    <div class="alert alert-info" role="alert">
-                        {success_message}
+                    <div className="alert alert-info" role="alert">
+                        Votre profil a bien été enregistré
                     </div>
                     }
 
                     {error_message !== "" &&
-                    <div class="alert alert-danger" role="alert">
+                    <div className="alert alert-danger" role="alert">
                         {error_message}
                     </div>
                     }

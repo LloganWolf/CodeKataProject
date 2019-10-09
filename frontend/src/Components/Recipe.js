@@ -62,7 +62,7 @@ class Recipe extends Component {
     const ingredients = ingredient.split("; ");
     const date_creation = created_at.substring(0, created_at.lastIndexOf('T'));
 
-    if(this.props.userDatas[0] === undefined) {
+    if(this.props.userDatas[0] === undefined || this.props.userDatas[0] === null) {
       return <Redirect push to={`/`} />
     }
 

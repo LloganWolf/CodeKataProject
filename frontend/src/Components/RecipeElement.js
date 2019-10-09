@@ -82,7 +82,7 @@ class RecipeElement extends Component {
                         </div>
 
                         {error_message !== "" &&
-                        <div class="alert alert-danger" role="alert">
+                        <div className="alert alert-danger" role="alert">
                             Erreur lors de la suppression de la recette : {error_message}
                         </div>
                         }

@@ -34,17 +34,19 @@ class App extends Component {
   }
 
   componentDidMount() {
-    axios.get(`http://localhost:6002/api/recipes/user/${this.state.id}`)
-      .then(res => {
-        console.log(res.data)
-        this.setState({
-          recipes: res.data,
-        })
-      })
+	if(this.props.userDatas[0] !== null) {
+		axios.get(`http://localhost:6002/api/recipes/user/${this.state.id}`)
+		  .then(res => {
+			
+			this.setState({
+			  recipes: res.data,
+			})
+		  })
+	}
   }
 
   render() {
-    if(this.props.userDatas[0] === undefined) {
+    if(this.props.userDatas[0] === null || this.props.userDatas[0] === undefined) {
       return <Redirect push to={`/`} />
     }
 
@@ -59,7 +61,7 @@ class App extends Component {
             <Title titre="Mes recettes" accroche="Retrouver toute vos recettes" />
             
             <div className="row">
-              <Recipes />
+				<Recipes />
             </div>
           
           </div>

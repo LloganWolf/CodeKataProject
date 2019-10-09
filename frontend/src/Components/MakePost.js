@@ -26,12 +26,12 @@ class MakePost extends Component {
             
           <Navbar />
   
-          <div class="content">
-            <div class="container">
+          <div className="content">
+            <div className="container">
               <Title titre="Nouvelle recette" accroche="Créer toute de suite votre recette" />    
-              <div class="row make-post">
-                <div class="col-md-8 col-sm-8">
-                  <div class="formy">
+              <div className="row make-post">
+                <div className="col-md-8 col-sm-8">
+                  <div className="formy">
                     <PostForm />
                   </div>
                 </div>

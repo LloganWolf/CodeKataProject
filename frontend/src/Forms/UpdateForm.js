@@ -18,6 +18,7 @@ class UpdateForm extends Component {
             success_message: false,
             error_message: "",
         }
+		this.fileInput = React.createRef();
     }
 
     componentDidMount() {
