@@ -2,7 +2,7 @@
 *1/ Informations générales*
 Ce projet est un site internet communautaire permettant de gérer ses recettes de cuisine. Sur ce site, il est possible de :
    - créer des recettes de cuisine
-   - créer ses recettes de cuisine
+   - modifier ses recettes de cuisine
    - supprimer ses recettes de cuisine
 
 *2/ Informations sur le projet*
