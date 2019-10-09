@@ -58,6 +58,7 @@ mysql.createConnection({
 	// Création des routers
 	let ApiRouter = express.Router();
 	let RecipesRouter = express.Router();
+	let UsersRouter = express.Router();
 
 	// Appel des classes
 	let Recipes = require('./assets/classes/recipes-class')(db, config)
@@ -219,6 +220,7 @@ mysql.createConnection({
 	// On définit l'URL racine des routers
 	app.use(`${config.api_path}`, ApiRouter)
 	app.use(`${config.api_path}${config.recipes_path}`, RecipesRouter)
+	app.use(`${config.api_path}${config.users_path}`, UsersRouter)
 	
 	/****** LANCEMENT DE L'APPLICATION ******/
 	app.listen(config.api_port, () => {
