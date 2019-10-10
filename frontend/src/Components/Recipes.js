@@ -37,9 +37,6 @@ class Recipes extends Component {
 
   render() {
     let { recipes } = this.state
-    if(this.props.userDatas[0] === null || this.props.userDatas[0] === undefined) {
-      return <Redirect push to={`/`} />
-    }
     
     return (
         <Fragment>

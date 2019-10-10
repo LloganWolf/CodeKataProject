@@ -17,17 +17,17 @@ function userCredentials(state=initialState, action) {
         
         // LORS D'UNE DECONNEXION
         case "REMOVE_USER_CREDENTIALS":
-            const userDatas = state.userDatas.findIndex(data => data.id) 
+            //const userDatas = state.userDatas.findIndex(data => data.id) 
             // On verifie si il y a quelque chose de renseigné
-            if(userDatas !== -1) {
+            //if(userDatas !== -1) {
                 // L'utilisateur est déja loggé, on le supprime
                 nextState ={
                     ...state,
                     userDatas: []
                 }
-            }
+            //}
 
-            return nextState || state
+            return nextState
 
         default:
             return state

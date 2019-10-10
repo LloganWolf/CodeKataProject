@@ -1,12 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { Router, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 
 import { store, persistor } from './Store/configureStore';
 
 import './index.css';
+import history from "./history";
+
 import App from './App';
 import Recipe from './Components/Recipe';
 import MakePost from './Components/MakePost';
@@ -18,7 +20,7 @@ import * as serviceWorker from './serviceWorker';
 const Root = () => (
     <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-            <BrowserRouter>
+            <Router history={history}>
                 <Switch>
                     <Route exact path='/' component={Subscription} />
                     <Route path='/accueil/' component={App} />
@@ -27,7 +29,7 @@ const Root = () => (
                     <Route path='/recipe/' component={Recipe} />
                     <Route component={NotFound} />
                 </Switch>
-            </BrowserRouter>
+            </Router>
         </PersistGate>
     </Provider>
 )

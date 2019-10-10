@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Redirect } from 'react-router-dom';
+import history from "../history";
 import { connect } from 'react-redux';
 
 class Header extends Component {
@@ -10,20 +10,21 @@ class Header extends Component {
 		};
   }
 
-  handle_logout = () => {
+  handle_logout = (event) => {
+    event.preventDefault();
     // Action sur le store
     const action = { 
       type: "REMOVE_USER_CREDENTIALS",
       value: this.props.userDatas
     }
     this.props.dispatch(action)
-
+    console.log("test")
     // On vide le State
 		this.setState({
 			logged_in: false,
     });
 
-    return <Redirect push to={`/`} />
+    history.push('/')
     
   };
   
@@ -52,7 +53,7 @@ class Header extends Component {
               {/* End RECHERCHE */}
 
               <div className="col-md-1 col-sm-1">
-                <form onSubmit={this.handle_logout}>
+                <form onSubmit={e => this.handle_logout(e)}>
                   <button id="deconnexion" type="submit" className="btn cb-bouton_rouge"><i className="fa fa-sign-out" aria-hidden="true"></i></button>
                 </form>
               </div>

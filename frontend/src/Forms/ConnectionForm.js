@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import history from "../history";
 
 class ConnectionForm extends Component {
     constructor(props) {
@@ -10,7 +10,6 @@ class ConnectionForm extends Component {
             login: "",
             email: "",
             password: "",
-            logged_in: false,
             error_message: "",
         }
     }
@@ -40,18 +39,20 @@ class ConnectionForm extends Component {
         axios
             .post(`http://localhost:6002/api/users/signin`, data)
             .then(res => {
-				
                 if(res.status === 200) {
-					if(res.data.status !== "error") {
+                    if(res.data.status !== "error") {
+                        
 						const action = { 
 							type: "ADD_USER_CREDENTIALS",
 							value: res.data.result
 						}
 						this.props.dispatch(action)
-
-						this.setState({
-							logged_in: true,
-						})
+                        if( this.props.userDatas[2] !== null ) {
+                            this.setState({
+                                logged_in: true,
+                            })
+                            history.push('/accueil')
+                        }
 					} else {
 						this.setState({
 							error_message: res.data.message,
@@ -68,11 +69,7 @@ class ConnectionForm extends Component {
     }
     
     render() {
-        let {error_message, login, email, password, logged_in} = this.state;
-
-        if(logged_in) {
-            return <Redirect push to={`/accueil`} />
-        }
+        let {error_message, login, email, password} = this.state;
 
         return (
             <form name="connexionForm" onSubmit={e => this.handleLogin(e, this.state)} onReset={this.handleReset}>
