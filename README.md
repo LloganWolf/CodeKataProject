@@ -43,6 +43,7 @@ cd path/de/mon/repertoire
    ```
    - Installer les modules NodeJS nécessaire :
    ```
+   npm install nodemon
    npm install
    ```
    - Lancer le serveur NodeJS : 
